@@ -119,6 +119,7 @@ async def message_handle(update: Update, context: CallbackContext, message=None,
         
     await register_user_if_not_exists(update, context, update.message.from_user)
     if await is_previous_message_not_answered_yet(update, context): return
+    if message.chat.type == 'group' and config.telegram_bot_name not in update.message.text: return
 
     user_id = update.message.from_user.id
     chat_mode = db.get_user_attribute(user_id, "current_chat_mode")
