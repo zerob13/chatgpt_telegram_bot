@@ -237,7 +237,7 @@ async def is_previous_message_not_answered_yet(update: Update, context: Callback
 
 
 async def voice_message_handle(update: Update, context: CallbackContext):
-    if update.message.chat.type == 'group' and config.telegram_bot_name not in update.message.caption: return
+    if update.message.chat.type == 'group': return
     await register_user_if_not_exists(update, context, update.message.from_user)
     if await is_previous_message_not_answered_yet(update, context): return
 
