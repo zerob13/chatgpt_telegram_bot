@@ -112,7 +112,7 @@ async def retry_handle(update: Update, context: CallbackContext):
 
 
 async def message_handle(update: Update, context: CallbackContext, message=None, use_new_dialog_timeout=True):
-    if update.message.chat.type == 'group' and config.telegram_bot_name not in update.message.text: return
+    if update.message.chat.type == 'group' and config.telegram_bot_name not in update.message.caption: return
     # check if message is edited
     if update.edited_message is not None:
         await edited_message_handle(update, context)
@@ -237,6 +237,7 @@ async def is_previous_message_not_answered_yet(update: Update, context: Callback
 
 
 async def voice_message_handle(update: Update, context: CallbackContext):
+    if update.message.chat.type == 'group' and config.telegram_bot_name not in update.message.caption: return
     await register_user_if_not_exists(update, context, update.message.from_user)
     if await is_previous_message_not_answered_yet(update, context): return
 
