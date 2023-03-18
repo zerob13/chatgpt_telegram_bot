@@ -112,7 +112,7 @@ async def retry_handle(update: Update, context: CallbackContext):
 
 
 async def message_handle(update: Update, context: CallbackContext, message=None, use_new_dialog_timeout=True):
-    if update.message.chat.type == 'group' and config.telegram_bot_name not in update.message.caption: return
+    if update.message.chat.type == 'group' and config.telegram_bot_name not in update.message.text: return
     # check if message is edited
     if update.edited_message is not None:
         await edited_message_handle(update, context)
